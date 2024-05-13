@@ -1,42 +1,24 @@
 color_palette:
-  - "amaranth_purple=#AB274F"
   - "dark_red=#AA0000"
-  - "blood_red=#660000"
   - "red=#FF5555"
-  - "aero_orange=#FF4F00"
   - "gold=#FFAA00"
   - "yellow=#FFFF55"
-  - "peach=#FFE5B4"
   - "dark_green=#00AA00"
   - "green=#55FF55"
-  - "myrtle_green=#317873"
   - "aqua=#55FFFF"
   - "dark_aqua=#00AAAA"
-  - "zomp=#39A78D"
-  - "pacific_cyan=#1CA9C9"
   - "dark_blue=#0000AA"
   - "blue=#5555FF"
-  - "ultramarine=#120A8F"
-  - "denim=#1560BD"
   - "light_purple=#FF55FF"
   - "dark_purple=#AA00AA"
-  - "indigo=#4B0082"
-  - "byzantium=#702963"
-  - "hot_pink=#FF69B4"
-  - "cherry_blossom=#FFB7C5"
   - "white=#FFFFFF"
-  - "dutch_white=#EFDFBB"
   - "gray=#AAAAAA"
   - "dark_gray=#555555"
-  - "silver=#FCFCFC"
   - "black=#000000"
-  - "dark_brown=#4B3621"
-  - "light_brown=#964B00"
-  - "night=#222222"
 
 allow_op_bypass_restrictions: true # op players are able to use every possible setting and color freely
 allow_nc_tab_complete: true # allow people to quickly select their namecolor with tab key
-enable_itemcolor: false # allow people to color their items using /ic
+enable_itemcolor: true # allow people to color their items using /ic
 max_namecolor_combinations: 3 # this can be 255 at most, any larger will not work (this is only usable if gradient, flag or alternating is accessible)
 default_namecolor: "gray" # this uses the same syntax as the /nc command. adding decorations is possible like so: gray italic bold (for example)
 
@@ -74,45 +56,27 @@ playtime_joindate_requirements:
   - "flag=-1,-1"
 
     # colors:
-  - "amaranth_purple=-1,-1"
   - "dark_red=500,70"
-  - "blood_red=1000,100"
-  - "red=20,0"
-  - "aero_orange=200,60"
-  - "gold=10,0"
-  - "yellow=30,0"
-  - "peach=-1,-1"
+  - "red=91,96"
+  - "gold=46,48"
+  - "yellow=183,192"
   - "dark_green=-1,-1"
-  - "green=-1,-1"
-  - "myrtle_green=-1,-1"
-  - "aqua=70,0"
-  - "dark_aqua=200,D9-13-2023"
-  - "zomp=-1,-1"
-  - "pacific_cyan=-1,-1"
-  - "dark_blue=100,90"
-  - "blue=5,0"
-  - "ultramarine=-1,-1"
-  - "denim=-1,-1"
+  - "green=6,6"
+  - "aqua=365,384"
+  - "dark_aqua=-1,-1"
+  - "dark_blue=-1,-1"
+  - "blue=11,12"
   - "light_purple=-1,-1"
-  - "dark_purple=15,0"
-  - "indigo=-1,-1"
-  - "byzantium=-1,-1"
-  - "hot_pink=-1,-1"
-  - "cherry_blossom=-1,-1"
-  - "white=1,0"
-  - "dutch_white=-1,-1"
+  - "dark_purple=23,24"
+  - "white=3,3"
   - "gray=0,0"
-  - "dark_gray=100,100"
-  - "silver=-1,-1"
+  - "dark_gray=1460,1536"
   - "black=-1,-1"
-  - "dark_brown=-1,-1"
-  - "light_brown=-1,-1"
-  - "night=-1,-1"
 
   # text decorations:
-  - "bold=40,50"
+  - "bold=365,384"
   - "underlined=-1,-1"
-  - "italic=0,D8-20-2023"
+  - "italic=1460,1536"
   - "strikethrough=-1,-1"
   - "obfuscated=-1,-1"
 
@@ -120,17 +84,17 @@ playtime_joindate_requirements:
   - "hex=-1,-1"
 
 whitelists:
-  cool_people: # any amount of whitelists with any name can be added here with each having different permissions
+# cool_people: # any amount of whitelists with any name can be added here with each having different permissions
 
     # text decorations can be used here
     # custom user-defined color options such as 'hex' and 'rgb' may also be added here too
-    color_palette:
-      - "light_purple"
-      - "italic"
-      - "underlined"
-      - "dark_aqua"
+#   color_palette:
+#     - "light_purple"
+#     - "italic"
+#     - "underlined"
+#     - "dark_aqua"
 
     # any people on this whitelist will have access to the above listed colors, no matter their playtime or joindate or op status
-    whitelisted_users:
-      - "dc596807-4124-4946-a15c-57172943feff"
-      - "6d5453d0-9336-4801-9392-d8cf5e4136e2"
+#   whitelisted_users:
+#     - "dc596807-4124-4946-a15c-57172943feff"
+#     - "6d5453d0-9336-4801-9392-d8cf5e4136e2"
