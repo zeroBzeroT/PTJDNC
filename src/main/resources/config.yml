@@ -56,7 +56,7 @@ playtime_joindate_requirements:
   - "flag=-1,-1"
 
     # colors:
-  - "dark_red=70,500"
+  - "dark_red=768,730"
   - "red=96,91"
   - "gold=48,46"
   - "yellow=192,183"
