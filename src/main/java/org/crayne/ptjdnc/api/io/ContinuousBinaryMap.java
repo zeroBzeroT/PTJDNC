@@ -42,7 +42,9 @@ public abstract class ContinuousBinaryMap<T, U> {
         final byte[] content = Files.readAllBytes(file.toPath());
         int offset = 0;
         while (content.length != offset) {
-            final Triple<T, U, Integer> triple = decode(content, offset).orElseThrow(() -> new IOException("Could not load from file"));
+            final Triple<T, U, Integer> triple = decode(content, offset)
+                    .orElseThrow(() -> new IOException("Could not load from file"));
+            
             map.put(triple.getLeft(), triple.getMiddle());
             offset = triple.getRight();
         }

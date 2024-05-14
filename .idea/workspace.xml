@@ -2,24 +2,21 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="PTJDNC:jar" />
+      <artifact name="metacolor:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ccc2e57f-49d9-4910-a1fc-8527dda9f296" name="Changes" comment="added tab complete for hex and rgb options">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/PTJDNC_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/command/ItemColorCommand.java" afterDir="false" />
+    <list default="true" id="ccc2e57f-49d9-4910-a1fc-8527dda9f296" name="Changes" comment="inverted the behavior of validateExistingArguments to be less confusing">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/PTJDNC_jar.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/NameColorPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/NameColorPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/api/NameStyle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/api/NameStyle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/api/color/namecolor/FlagNameColor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/api/color/namecolor/FlagNameColor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/api/style/NameDecoration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/api/style/NameDecoration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/api/color/NameColor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/api/color/NameColor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/api/io/ContinuousBinaryMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/api/io/ContinuousBinaryMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/api/profile/NameStyleProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/api/profile/NameStyleProfile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/command/NameColorCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/command/NameColorCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/command/NameColorTabCompleter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/command/NameColorTabCompleter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,9 +58,10 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "last_opened_file_path": "/home/crayne/1.19.4 testing/plugins",
-    "project.structure.last.edited": "Artifacts",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors"
   }
 }]]></component>
   <component name="RunManager" selected="Application.Test">
@@ -172,7 +170,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697043249551</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="inverted the behavior of validateExistingArguments to be less confusing">
+      <created>1715701370396</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1715701370396</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -196,6 +201,7 @@
     <MESSAGE value="readme update" />
     <MESSAGE value="added options for hex and rgb" />
     <MESSAGE value="added tab complete for hex and rgb options" />
-    <option name="LAST_COMMIT_MESSAGE" value="added tab complete for hex and rgb options" />
+    <MESSAGE value="inverted the behavior of validateExistingArguments to be less confusing" />
+    <option name="LAST_COMMIT_MESSAGE" value="inverted the behavior of validateExistingArguments to be less confusing" />
   </component>
 </project>

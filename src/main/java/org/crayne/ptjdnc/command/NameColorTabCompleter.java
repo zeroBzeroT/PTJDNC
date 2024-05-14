@@ -44,7 +44,8 @@ public class NameColorTabCompleter implements TabCompleter {
                 .toList();
     }
 
-    private static boolean validateExistingArguments(@NotNull final List<String> argsList, @NotNull final List<String> availableNameColors) {
+    private static boolean validateExistingArguments(@NotNull final List<String> argsList,
+                                                     @NotNull final List<String> availableNameColors) {
         for (int i = 0; i < argsList.size(); i++) {
             final String s = argsList.get(i);
             if (s.isBlank()) continue;
@@ -65,7 +66,10 @@ public class NameColorTabCompleter implements TabCompleter {
     }
 
     @Nullable
-    public List<String> onTabComplete(@NotNull final CommandSender commandSender, @NotNull final Command command, @NotNull final String label, @NotNull final String @NotNull [] args) {
+    public List<String> onTabComplete(@NotNull final CommandSender commandSender,
+                                      @NotNull final Command command,
+                                      @NotNull final String label,
+                                      @NotNull final String @NotNull [] args) {
         if (!(commandSender instanceof final Player p)) return null;
 
         final List<String> argsList = Arrays.stream(args).toList().subList(0, args.length - 1);

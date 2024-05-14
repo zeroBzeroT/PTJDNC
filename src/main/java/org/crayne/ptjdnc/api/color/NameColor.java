@@ -21,7 +21,9 @@ public abstract class NameColor implements ColorLike {
     private static final int MAX_COLORS = 255;
 
     public NameColor(@NotNull final List<? extends ColorLike> colors) {
-        if (colors.size() > MAX_COLORS) throw new IllegalArgumentException("Invalid color list; Only up to " + MAX_COLORS + " colors can be used for a NameStyle.");
+        if (colors.size() > MAX_COLORS) throw new IllegalArgumentException("Invalid color list; Only up to "
+                + MAX_COLORS + " colors can be used for a NameStyle.");
+
         this.colors = colors;
     }
 
@@ -49,11 +51,19 @@ public abstract class NameColor implements ColorLike {
     }
 
     public byte @NotNull [] encode() {
-        return Bytes.concat(new byte[] {(byte) colors().size()}, Bytes.concat(colors.stream().map(ColorLike::encode).toList().toArray(new byte[0][])));
+        return Bytes.concat(
+                new byte[] {(byte) colors().size()},
+                Bytes.concat(colors.stream()
+                        .map(ColorLike::encode)
+                        .toList()
+                        .toArray(new byte[0][])
+                )
+        );
     }
 
     @NotNull
-    public static Optional<Pair<NameColor, Integer>> decode(@NotNull final NameDecoration textDecoration, final byte @NotNull [] encoded, final int offset) {
+    public static Optional<Pair<NameColor, Integer>> decode(@NotNull final NameDecoration textDecoration,
+                                                            final byte @NotNull [] encoded, final int offset) {
         if (encoded.length < 2) return Optional.empty();
         final int colorsAmount = encoded[offset];
         final int componentsAmount = colorsAmount * 3;

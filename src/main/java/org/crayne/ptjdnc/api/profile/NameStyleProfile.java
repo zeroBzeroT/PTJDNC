@@ -120,7 +120,8 @@ public class NameStyleProfile {
         colorPalette
                 .keys()
                 .stream()
-                .filter(colorName -> (player.isOp() && allowOpBypassRestrictions()) || nameColorAccessible(colorName, ptjdPalette, whitelists))
+                .filter(colorName -> (player.isOp() && allowOpBypassRestrictions())
+                        || nameColorAccessible(colorName, ptjdPalette, whitelists))
                 .forEach(colorName -> {
                     accessibleNameColors.put(colorName, colorPalette.findColor(colorName).orElseThrow());
                     accessibleNameColorsStylized.add(colorPalette.colorsStylized().get(colorName));

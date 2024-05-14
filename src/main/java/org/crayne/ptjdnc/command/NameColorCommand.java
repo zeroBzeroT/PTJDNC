@@ -203,15 +203,15 @@ public class NameColorCommand implements CommandExecutor {
 
         final int i = index.get();
         if (i + 3 >= args.length) return deserializeMessage("nc_no_rgb_specified", s -> s);
-        final String redComponentString   = args[i + 1];
+        final String redComponentString = args[i + 1];
         final String greenComponentString = args[i + 2];
-        final String blueComponentString  = args[i + 3];
+        final String blueComponentString = args[i + 3];
         index.set(index.get() + 3);
 
         try {
             final int r = Integer.parseInt(redComponentString),
-                      g = Integer.parseInt(greenComponentString),
-                      b = Integer.parseInt(blueComponentString);
+                    g = Integer.parseInt(greenComponentString),
+                    b = Integer.parseInt(blueComponentString);
 
             return NameColorCommandResult.success(RGB.of(r, g, b));
         } catch (final NumberFormatException e) {
@@ -221,7 +221,7 @@ public class NameColorCommand implements CommandExecutor {
 
     @NotNull
     private static NameColorCommandResult parseSingleNameColor(@NotNull final String[] args, @Nullable final Player p,
-                                                      @NotNull final AtomicInteger index, @NotNull final String namecolorString) {
+                                                               @NotNull final AtomicInteger index, @NotNull final String namecolorString) {
         return switch (namecolorString) {
             case "hex" -> parseHexNameColor(args, p, index);
             case "rgb" -> parseRGBNameColor(args, p, index);
@@ -231,8 +231,8 @@ public class NameColorCommand implements CommandExecutor {
 
     @NotNull
     private static Optional<NameColorCommandResult> collectNameColorParameters(@NotNull final String[] args, @Nullable final Player p,
-                                                   @NotNull final List<ColorLike> colors,
-                                                   @NotNull final List<NameDecoration> decorations) {
+                                                                               @NotNull final List<ColorLike> colors,
+                                                                               @NotNull final List<NameDecoration> decorations) {
         if (args.length == 1 && args[0].equals("reset") && p != null) {
             final GlobalNameStyleProfile globalNameStyleProfile = GlobalNameStyleProfile.INSTANCE;
             globalNameStyleProfile.nameStyle(p, globalNameStyleProfile.defaultNameColor());
@@ -293,12 +293,12 @@ public class NameColorCommand implements CommandExecutor {
     @NotNull
     private static NameColorCommandResult unknownNameColor(@Nullable final Player p, @NotNull final String unknownColor) {
         return deserializeMessage("nc_unknown_color", s -> s
-                        .replace("%ncname%", p == null ? "Console" : displayName(p))
-                        .replace("%nclist%", p == null
-                                ? availableNamecolors(GlobalNameStyleProfile.INSTANCE.allNameColorsStylized())
-                                : availableNamecolors(p))
+                .replace("%ncname%", p == null ? "Console" : displayName(p))
+                .replace("%nclist%", p == null
+                        ? availableNamecolors(GlobalNameStyleProfile.INSTANCE.allNameColorsStylized())
+                        : availableNamecolors(p))
 
-                        .replace("%unknownnc%", unknownColor));
+                .replace("%unknownnc%", unknownColor));
     }
 
     @NotNull

@@ -137,7 +137,9 @@ public class NameDecoration implements ColorLike {
         final boolean gradient       = (encoded & (1 << 5)) != 0;
         final boolean flag           = (encoded & (1 << 6)) != 0;
         final boolean alternating    = (encoded & (1 << 7)) != 0;
-        return Optional.of(new NameDecoration(bold, italic, strikethrough, underlined, obfuscated, gradient, flag, alternating));
+
+        return Optional.of(new NameDecoration(bold, italic, strikethrough, underlined,
+                obfuscated, gradient, flag, alternating));
     }
 
     public boolean hasDecoration(@NotNull final TextDecoration decoration) {
