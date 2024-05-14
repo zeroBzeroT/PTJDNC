@@ -129,8 +129,8 @@ public class NameStyleProfile {
     }
 
     public boolean nameColorAccessible(@NotNull final String colorName,
-                                           @NotNull final PlaytimeJoindatePalette ptjdPalette,
-                                           @NotNull final Set<NameStyleWhitelist> whitelists) {
+                                       @NotNull final PlaytimeJoindatePalette ptjdPalette,
+                                       @NotNull final Set<NameStyleWhitelist> whitelists) {
 
         return ptjdPalette.nameColorRequirement(colorName).orElseThrow().allows(joinDateDays, playTimeHours)
                 || whitelists.stream().anyMatch(whitelist -> whitelist.nameColorAccessible(uuid, colorName));

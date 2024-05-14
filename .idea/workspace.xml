@@ -9,14 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ccc2e57f-49d9-4910-a1fc-8527dda9f296" name="Changes" comment="inverted the behavior of validateExistingArguments to be less confusing">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/PTJDNC_jar.xml" beforeDir="false" />
+    <list default="true" id="ccc2e57f-49d9-4910-a1fc-8527dda9f296" name="Changes" comment="fixed the formatting for better readability in various places">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/api/config/whitelist/ConfigurableWhitelist.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/api/config/whitelist/DonatorWhitelist.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/api/color/NameColor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/api/color/NameColor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/api/io/ContinuousBinaryMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/api/io/ContinuousBinaryMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/api/config/whitelist/NameStyleWhitelist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/api/config/whitelist/NameStyleWhitelist.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/api/profile/NameStyleProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/api/profile/NameStyleProfile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/command/NameColorCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/command/NameColorCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/command/NameColorTabCompleter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/ptjdnc/command/NameColorTabCompleter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,9 +55,9 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "/home/crayne/1.19.4 testing/plugins",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
+    "last_opened_file_path": "/home/crayne/DonationAPI/DonationAPI.jar",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors"
   }
@@ -177,7 +175,14 @@
       <option name="project" value="LOCAL" />
       <updated>1715701370396</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="fixed the formatting for better readability in various places">
+      <created>1715702507953</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1715702507953</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -202,6 +207,7 @@
     <MESSAGE value="added options for hex and rgb" />
     <MESSAGE value="added tab complete for hex and rgb options" />
     <MESSAGE value="inverted the behavior of validateExistingArguments to be less confusing" />
-    <option name="LAST_COMMIT_MESSAGE" value="inverted the behavior of validateExistingArguments to be less confusing" />
+    <MESSAGE value="fixed the formatting for better readability in various places" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed the formatting for better readability in various places" />
   </component>
 </project>
