@@ -51,17 +51,17 @@ public class NameColorTabCompleter implements TabCompleter {
 
             if (s.equals("rgb") && availableNameColors.contains("rgb")) {
                 i += 3;
-                if (i >= argsList.size()) return true;
+                if (i >= argsList.size()) return false;
                 continue;
             }
             if (s.equals("hex") && availableNameColors.contains("hex")) {
                 i++;
-                if (i >= argsList.size()) return true;
+                if (i >= argsList.size()) return false;
                 continue;
             }
-            if (!availableNameColors.contains(s)) return true;
+            if (!availableNameColors.contains(s)) return false;
         }
-        return false;
+        return true;
     }
 
     @Nullable
@@ -86,7 +86,7 @@ public class NameColorTabCompleter implements TabCompleter {
                 .toList();
 
         availableNameColors.addAll(accessibleCustomNameColors);
-        if (validateExistingArguments(argsList, availableNameColors)) return new ArrayList<>();
+        if (!validateExistingArguments(argsList, availableNameColors)) return new ArrayList<>();
 
         if (argsList.stream().anyMatch(colors()::contains) && !argsList.contains("gradient") && !argsList.contains("flag") && !argsList.contains("alternating"))
             availableNameColors.removeAll(colors());
