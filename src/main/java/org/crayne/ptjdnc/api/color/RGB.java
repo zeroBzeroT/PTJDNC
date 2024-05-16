@@ -73,7 +73,11 @@ public class RGB implements ColorLike {
     }
 
     @NotNull
-    public static RGB of(final int r, final int g, final int b) {
+    public static RGB of(int r, int g, int b) {
+        if (invalidRange(r)) r = 255;
+        if (invalidRange(g)) g = 255;
+        if (invalidRange(b)) b = 255;
+
         return new RGB(r, g, b);
     }
 
