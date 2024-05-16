@@ -14,6 +14,7 @@ import org.crayne.ptjdnc.api.config.whitelist.NameStyleWhitelist;
 import org.crayne.ptjdnc.api.style.NameDecoration;
 import org.crayne.ptjdnc.command.NameColorCommand;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -157,23 +158,26 @@ public class GlobalNameStyleProfile {
         nameStyle(player.getUniqueId(), newNameStyle);
     }
 
-    public boolean nameColorAccessible(@NotNull final UUID uuid, @NotNull final String colorName) {
-        return findProfileOrCreateDefault(uuid).nameColorAccessible(colorName);
+    public boolean nameColorAccessible(@Nullable final UUID uuid, @NotNull final String colorName) {
+        return uuid == null || findProfileOrCreateDefault(uuid).nameColorAccessible(colorName);
     }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    public boolean nameColorAccessible(@NotNull final Player player, @NotNull final String colorName) {
-        return findProfileOrCreateDefault(player.getUniqueId()).nameColorAccessible(colorName, player);
+    public boolean nameColorAccessible(@Nullable final Player player, @NotNull final String colorName) {
+        return player == null || findProfileOrCreateDefault(player.getUniqueId()).nameColorAccessible(colorName, player);
     }
 
     @NotNull
-    public Map<String, ColorLike> accessibleNameColors(@NotNull final UUID uuid) {
-        return findProfileOrCreateDefault(uuid).accessibleNameColors();
+    public Map<String, ColorLike> accessibleNameColors(@Nullable final UUID uuid) {
+        if (uuid != null)
+            return findProfileOrCreateDefault(uuid).accessibleNameColors();
+
+        return colorPalette.colorMap();
     }
 
     @NotNull
-    public Map<String, ColorLike> accessibleNameColors(@NotNull final Player player) {
-        return accessibleNameColors(player.getUniqueId());
+    public Map<String, ColorLike> accessibleNameColors(@Nullable final Player player) {
+        return accessibleNameColors(player == null ? null : player.getUniqueId());
     }
 
     @NotNull
