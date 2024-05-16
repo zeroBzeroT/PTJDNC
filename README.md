@@ -4,15 +4,6 @@ Fully configurable playtime + joindate based namecolor plugin for 1.19
 In order to get access to any given name color, both the joindate requirement (JD min.) as well as the playtime requirement (PT min.) have to be fulfilled.
 The playtime numbers here are measured in hours, whereas the joindate is either measured in days, or a certain date, where the player must have joined before it.
 
-## Suggestions for playtime and joindate
-- [x] colors in the table below are usable
-- [x] command without arguments displays available colors, joining date and playing time
-- [x] once you have bold or italic name you can use it with the other colors
-- [x] underline and strikethrough for op
-- [x] full configuration and the ability to add new colors at will (with any custom pt / jd)
-- [x] integrated donator API (automated donators.yml whitelist that is maintained with a plugin)
-- [ ] command for op to change other ncs
-
 # Example Configuration on 0b0t.org
 ## Obtainable Namecolors for everyone
 | color       | PT min. | JD min.      | example                       | hex code |
