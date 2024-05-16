@@ -15,6 +15,18 @@ import java.util.stream.Stream;
 
 public class NameColorTabCompleter implements TabCompleter {
 
+
+    @Nullable
+    public List<String> onTabComplete(@NotNull final CommandSender commandSender,
+                                      @NotNull final Command command,
+                                      @NotNull final String label,
+                                      @NotNull final String @NotNull [] args) {
+        if (!(commandSender instanceof final Player p)) return null;
+
+        final List<String> argsList = Arrays.stream(args).toList().subList(0, args.length - 1);
+        return tabCompleteFor(p, argsList);
+    }
+
     @Cacheable
     @NotNull
     public Collection<String> colors() {
@@ -23,7 +35,7 @@ public class NameColorTabCompleter implements TabCompleter {
 
     @Cacheable
     @NotNull
-    public List<String> accessibleDecorations(@NotNull final Player p) {
+    public List<String> accessibleDecorations(@Nullable final Player p) {
         return GlobalNameStyleProfile.INSTANCE
                 .colorPalette()
                 .decorationPalette()
@@ -66,13 +78,7 @@ public class NameColorTabCompleter implements TabCompleter {
     }
 
     @Nullable
-    public List<String> onTabComplete(@NotNull final CommandSender commandSender,
-                                      @NotNull final Command command,
-                                      @NotNull final String label,
-                                      @NotNull final String @NotNull [] args) {
-        if (!(commandSender instanceof final Player p)) return null;
-
-        final List<String> argsList = Arrays.stream(args).toList().subList(0, args.length - 1);
+    public List<String> tabCompleteFor(@Nullable final Player p, @NotNull final List<String> argsList) {
         if (argsList.contains("reset")) return new ArrayList<>();
 
         final List<NameDecoration> decorations = findDecorations(argsList);
@@ -92,7 +98,8 @@ public class NameColorTabCompleter implements TabCompleter {
         availableNameColors.addAll(accessibleCustomNameColors);
         if (!validateExistingArguments(argsList, availableNameColors)) return new ArrayList<>();
 
-        if (argsList.stream().anyMatch(colors()::contains) && !argsList.contains("gradient") && !argsList.contains("flag") && !argsList.contains("alternating"))
+        if (argsList.stream().anyMatch(colors()::contains) && !argsList.contains("gradient")
+                && !argsList.contains("flag") && !argsList.contains("alternating"))
             availableNameColors.removeAll(colors());
 
         if (argsList.contains("gradient")) availableNameColors.removeAll(List.of("flag", "alternating"));

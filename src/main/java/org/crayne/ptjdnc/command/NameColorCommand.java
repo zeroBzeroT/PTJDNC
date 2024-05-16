@@ -42,28 +42,41 @@ public class NameColorCommand implements CommandExecutor {
             return false;
         }
         if (args.length == 0) {
-            sendAvailableColors(p);
+            sendAvailableColors(p, p);
             return true;
         }
         final GlobalNameStyleProfile globalNameStyleProfile = GlobalNameStyleProfile.INSTANCE;
 
         final NameStyle oldNameStyle = globalNameStyleProfile.nameStyle(p);
         final NameColorCommandResult nameColorParsed = parseNameColor(args, p, oldNameStyle);
-        final Component errorMessage = nameColorParsed.message();
+        return updateNameColor(nameColorParsed, p, p);
+    }
+
+    protected static boolean updateNameColor(@NotNull final NameColorCommandResult result,
+                                             @NotNull final CommandSender sender,
+                                             @NotNull final Player target) {
+        final GlobalNameStyleProfile globalNameStyleProfile = GlobalNameStyleProfile.INSTANCE;
+        final Component errorMessage = result.message();
         if (errorMessage != null) {
-            p.sendMessage(errorMessage);
+            sender.sendMessage(errorMessage);
             return false;
         }
-        final NameStyle newNameStyle = nameColorParsed.toMetaNameColor();
-        globalNameStyleProfile.nameStyle(p, newNameStyle);
-        globalNameStyleProfile.updateNameStyle(p);
+        if (result.reset()) {
+            globalNameStyleProfile.nameStyle(target, globalNameStyleProfile.defaultNameColor());
+            globalNameStyleProfile.updateNameStyle(target);
+            sender.sendMessage(sendNameColorChanged(target));
+            return true;
+        }
+        final NameStyle newNameStyle = result.toMetaNameColor();
+        globalNameStyleProfile.nameStyle(target, newNameStyle);
+        globalNameStyleProfile.updateNameStyle(target);
 
-        p.sendMessage(sendNameColorChanged(p));
+        sender.sendMessage(sendNameColorChanged(target));
         return true;
     }
 
-    protected static void sendAvailableColors(@NotNull final Player p) {
-        p.sendMessage(deserialize("nc_info_page", s -> s
+    protected static void sendAvailableColors(@NotNull final CommandSender sender, @NotNull final Player p) {
+        sender.sendMessage(deserialize("nc_info_page", s -> s
                 .replace("%ncname%", displayName(p))
                 .replace("%pt%", (int) PlaytimeJoindateRequirement.playTimeInHours(p) + "")
                 .replace("%jd%", PlaytimeJoindateRequirement.joinDateFormatted(p))
@@ -72,7 +85,7 @@ public class NameColorCommand implements CommandExecutor {
     }
 
     @NotNull
-    private static Component sendNameColorChanged(@NotNull final Player p) {
+    protected static Component sendNameColorChanged(@NotNull final Player p) {
         return LegacyComponentSerializer.legacyAmpersand().deserialize(
                 commandText("nc_changed")
                         .replace("%ncname%", displayName(p)));
@@ -137,7 +150,7 @@ public class NameColorCommand implements CommandExecutor {
         return new SingletonNameColor(colors);
     }
 
-    public record NameColorCommandResult(@Nullable Component message, @Nullable ColorLike nameColor) {
+    public record NameColorCommandResult(@Nullable Component message, @Nullable ColorLike nameColor, boolean reset) {
 
         @NotNull
         public static NameColorCommandResult successMessage(@NotNull final Player p) {
@@ -145,13 +158,23 @@ public class NameColorCommand implements CommandExecutor {
         }
 
         @NotNull
+        public static NameColorCommandResult resetMessage() {
+            return reset(null);
+        }
+
+        @NotNull
         public static NameColorCommandResult message(@NotNull final Component component) {
-            return new NameColorCommandResult(component, null);
+            return new NameColorCommandResult(component, null, false);
+        }
+
+        @NotNull
+        public static NameColorCommandResult reset(@Nullable final Component component) {
+            return new NameColorCommandResult(component, null, true);
         }
 
         @NotNull
         public static NameColorCommandResult success(@NotNull final ColorLike nameColor) {
-            return new NameColorCommandResult(null, nameColor);
+            return new NameColorCommandResult(null, nameColor, false);
         }
 
         @NotNull
@@ -169,10 +192,8 @@ public class NameColorCommand implements CommandExecutor {
 
     @NotNull
     private static NameColorCommandResult parseDefaultNameColor(@Nullable final Player p, @NotNull final String namecolorString) {
-        final Optional<ColorLike> color = findColorByParameter(p, namecolorString);
-        if (color.isEmpty()) return unknownNameColor(p, namecolorString);
-
-        return NameColorCommandResult.success(color.get());
+        return findColorByParameter(p, namecolorString).map(NameColorCommandResult::success)
+                .orElseGet(() -> unknownNameColor(p, namecolorString));
     }
 
     @NotNull
@@ -233,13 +254,8 @@ public class NameColorCommand implements CommandExecutor {
     private static Optional<NameColorCommandResult> collectNameColorParameters(@NotNull final String[] args, @Nullable final Player p,
                                                                                @NotNull final List<ColorLike> colors,
                                                                                @NotNull final List<NameDecoration> decorations) {
-        if (args.length == 1 && args[0].equals("reset") && p != null) {
-            final GlobalNameStyleProfile globalNameStyleProfile = GlobalNameStyleProfile.INSTANCE;
-            globalNameStyleProfile.nameStyle(p, globalNameStyleProfile.defaultNameColor());
-            globalNameStyleProfile.updateNameStyle(p);
-
-            return Optional.of(NameColorCommandResult.successMessage(p));
-        }
+        if (args.length == 1 && args[0].equals("reset"))
+            return Optional.of(NameColorCommandResult.resetMessage());
 
         for (int i = 0; i < args.length; i++) {
             final String namecolorString = args[i];

@@ -11,3 +11,6 @@ commands:
   itemcolor:
     description: "itemcolor command"
     aliases: ["ic"]
+  opnamecolor:
+    description: "namecolor command for ops to change other players nc"
+    aliases: ["opnc"]

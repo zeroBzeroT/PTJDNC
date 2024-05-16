@@ -27,7 +27,7 @@ public class ItemColorCommand implements CommandExecutor {
             return false;
         }
         if (args.length == 0) {
-            sendAvailableColors(p);
+            sendAvailableColors(p, p);
             return true;
         }
         final ItemStack mainhandItem = p.getInventory().getItemInMainHand();

@@ -2,14 +2,13 @@ package org.crayne.ptjdnc;
 
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.crayne.ptjdnc.api.config.ConfigParseException;
 import org.crayne.ptjdnc.api.profile.GlobalNameStyleProfile;
-import org.crayne.ptjdnc.command.ItemColorCommand;
-import org.crayne.ptjdnc.command.NameColorCommand;
-import org.crayne.ptjdnc.command.NameColorTabCompleter;
+import org.crayne.ptjdnc.command.*;
 import org.crayne.ptjdnc.event.PlayerOpStatusChangeEvent;
 import org.crayne.ptjdnc.event.listener.PlayerEventListener;
 import org.jetbrains.annotations.NotNull;
@@ -34,25 +33,63 @@ public class NameColorPlugin extends JavaPlugin {
         saveDefaultConfig();
 
         GlobalNameStyleProfile.INSTANCE.load();
-        getServer().getPluginManager().registerEvents(new PlayerEventListener(), this);
 
-        final NameColorTabCompleter ncTabCompleter = new NameColorTabCompleter();
-        Stream.of("namecolor", "nc")
+        registerEvents();
+        registerCommands();
+        registerPlayerOpEventTimerTask();
+    }
+
+    public void onDisable() {
+        GlobalNameStyleProfile.INSTANCE.save();
+    }
+
+    public void removeTrackedPlayer(@NotNull final UUID uuid) {
+        previousOpValues.remove(uuid);
+    }
+
+    @NotNull
+    private Stream<PluginCommand> findCommands(@NotNull final String @NotNull ... cmds) {
+        return Stream.of(cmds)
                 .map(this::getCommand)
-                .filter(Objects::nonNull)
+                .filter(Objects::nonNull);
+    }
+
+    @NotNull
+    public static NameColorPlugin plugin() {
+        return Optional.ofNullable(plugin).orElseThrow(() -> new RuntimeException("The plugin has not been initialized yet."));
+    }
+
+    @NotNull
+    public static FileConfiguration config() {
+        return plugin().getConfig();
+    }
+
+    private void registerEvents() {
+        getServer().getPluginManager().registerEvents(new PlayerEventListener(), this);
+    }
+
+    private void registerCommands() {
+        final NameColorTabCompleter ncTabCompleter = new NameColorTabCompleter();
+        findCommands("namecolor", "nc")
                 .forEach(c -> {
                     c.setExecutor(new NameColorCommand());
                     c.setTabCompleter(ncTabCompleter);
                 });
 
-        Stream.of("itemcolor", "ic")
-                .map(this::getCommand)
-                .filter(Objects::nonNull)
+        findCommands("itemcolor", "ic")
                 .forEach(c -> {
                     c.setExecutor(new ItemColorCommand());
                     c.setTabCompleter(ncTabCompleter);
                 });
 
+        findCommands("opnamecolor", "opnc")
+                .forEach(c -> {
+                    c.setExecutor(new OpNameColorCommand());
+                    c.setTabCompleter(new OpNameColorTabCompleter());
+                });
+    }
+
+    private void registerPlayerOpEventTimerTask() {
         // probably not the best solution for a player op event, but atleast it works? spigot or paper, please add an op event :sob:
         Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
             final Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
@@ -77,24 +114,6 @@ public class NameColorPlugin extends JavaPlugin {
                 Bukkit.getPluginManager().callEvent(opStatusChangeEvent);
             });
         }, 20L, 20L);
-    }
-
-    public void onDisable() {
-        GlobalNameStyleProfile.INSTANCE.save();
-    }
-
-    public void removeTrackedPlayer(@NotNull final UUID uuid) {
-        previousOpValues.remove(uuid);
-    }
-
-    @NotNull
-    public static NameColorPlugin plugin() {
-        return Optional.ofNullable(plugin).orElseThrow(() -> new RuntimeException("The plugin has not been initialized yet."));
-    }
-
-    @NotNull
-    public static FileConfiguration config() {
-        return plugin().getConfig();
     }
 
     @NotNull
