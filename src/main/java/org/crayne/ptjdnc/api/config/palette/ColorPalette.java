@@ -25,6 +25,9 @@ public class ColorPalette {
     @NotNull
     private final Map<String, Component> nameColorsStylized;
 
+    @NotNull
+    private final Map<String, ColorLike> colorMap;
+
     public ColorPalette() {
         this.colorPalette = new LinkedHashMap<>();
         this.decorationPalette = new LinkedHashMap<>();
@@ -40,12 +43,15 @@ public class ColorPalette {
 
         this.keys = new ArrayList<>();
         this.nameColorsStylized = new LinkedHashMap<>();
+
+        this.colorMap = new HashMap<>();
     }
 
     public void load() {
         keys.clear();
         nameColorsStylized.clear();
         colorPalette.clear();
+        colorMap.clear();
 
         NameColorPlugin.readEntryList("color_palette")
                 .entrySet()
@@ -62,6 +68,14 @@ public class ColorPalette {
         keys.forEach(colorName -> nameColorsStylized.put(colorName, findColor(colorName)
                         .orElseThrow()
                         .stylize(colorName)));
+
+        colorMap.putAll(colorPalette);
+        colorMap.putAll(decorationPalette);
+    }
+
+    @NotNull
+    public Map<String, ColorLike> colorMap() {
+        return colorMap;
     }
 
     @NotNull
