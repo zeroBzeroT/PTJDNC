@@ -1,8 +1,10 @@
 main: org.crayne.ptjdnc.NameColorPlugin
 name: PTJDNC
-version: 1.0
-api-version: 1.19
-description: "namecolor plugin inspired by 0b0t playtime namecolor for newer minecraft versions"
+version: ${project.version}
+api-version: 1.20
+description: ${project.description}
+authors: [ crayne, bierdosenhalter ]
+depend: [ DonationAPI ]
 
 commands:
   namecolor:

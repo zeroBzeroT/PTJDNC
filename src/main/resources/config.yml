@@ -56,27 +56,29 @@ playtime_joindate_requirements:
   - "flag=-1,-1"
 
     # colors:
-  - "dark_red=768,730"
-  - "red=96,91"
-  - "gold=48,46"
-  - "yellow=192,183"
-  - "dark_green=-1,-1"
-  - "green=6,6"
-  - "aqua=384,365"
-  - "dark_aqua=-1,-1"
-  - "dark_blue=-1,-1"
-  - "blue=12,11"
-  - "light_purple=-1,-1"
-  - "dark_purple=24,23"
-  - "white=3,3"
   - "gray=0,0"
-  - "dark_gray=1536,1460"
+  - "white=3,3"
+  - "green=6,6"
+  - "blue=12,11"
+  - "dark_purple=24,23"
+  - "gold=48,46"
+  - "red=96,91"
+  - "yellow=192,183"
+  - "aqua=384,365"
+  - "dark_gray=768,730"
+  - "dark_green=1536,1460"
+  - "dark_blue=2304,2190"
+  - "dark_red=3072,2920"
+  - "dark_aqua=3840,3650"
+
+  - "light_purple=-1,-1"
   - "black=-1,-1"
 
   # text decorations:
   - "bold=384,365"
-  - "underlined=-1,-1"
   - "italic=1536,1460"
+
+  - "underlined=-1,-1"
   - "strikethrough=-1,-1"
   - "obfuscated=-1,-1"
 
@@ -86,9 +88,6 @@ playtime_joindate_requirements:
 whitelists:
   donators:
     color_palette:
-      - "dark_aqua"
-      - "dark_blue"
-      - "dark_green"
       - "light_purple"
 
     # whitelisted_users are automatically handled using the DonationAPI
