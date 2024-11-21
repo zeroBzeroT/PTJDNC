@@ -1,6 +1,7 @@
 package org.crayne.ptjdnc.command;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -11,6 +12,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.crayne.ptjdnc.NameColorPlugin;
 import org.crayne.ptjdnc.api.NameStyle;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Optional;
 
 import static org.crayne.ptjdnc.command.NameColorCommand.*;
 
@@ -35,11 +38,17 @@ public class ItemColorCommand implements CommandExecutor {
             p.sendMessage(deserialize("ic_no_item_held", s -> s));
             return false;
         }
+        final PlainTextComponentSerializer plainText = PlainTextComponentSerializer.plainText();
         final ItemMeta meta = mainhandItem.getItemMeta();
-        final Component displayName = Component.translatable(mainhandItem.translationKey());
+        final Component defaultDisplayComponent = Component.translatable(mainhandItem.translationKey());
+        final Component displayName = Optional.ofNullable(meta.displayName()).orElse(defaultDisplayComponent);
+        final String defaultDisplayName = plainText.serialize(defaultDisplayComponent);
 
         if (args.length == 1 && args[0].equals("reset")) {
-            meta.displayName(null);
+            final String strippedColorName = plainText.serialize(displayName);
+            final Component strippedColorComponent = defaultDisplayName.equals(strippedColorName) ? null : Component.text(strippedColorName);
+
+            meta.displayName(strippedColorComponent);
             mainhandItem.setItemMeta(meta);
             p.sendMessage(deserialize("ic_success", s -> s));
             return true;
