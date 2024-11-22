@@ -6,7 +6,7 @@
 
     <groupId>org.crayne</groupId>
     <artifactId>MetaColor</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
 
     <description>Name coloring plugin, inspired by 0b0t's playtime name color feature, rewards users with extra name
         colors depending on their joining date and playtime.
