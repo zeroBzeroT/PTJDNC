@@ -35,7 +35,7 @@ Donators of 0b0t.org may get special perks for namecolor selection, such as addi
 | dark_green      | ![](examples/dark_green.png)         | #00AA00  |
 | light_purple    | ![](examples/light_purple.png)       | #FF55FF  |
 
-## Currently unobtainale Namecolors
+## Currently unobtainable Namecolors
 On 0b0t.org, these namecolors are not available to anyone except admins as of currently, but this may change in the future.
 
 | color           | example                           | hex code |
