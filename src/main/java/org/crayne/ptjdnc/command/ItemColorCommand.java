@@ -3,12 +3,15 @@ package org.crayne.ptjdnc.command;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.crayne.ptjdnc.NameColorPlugin;
 import org.crayne.ptjdnc.api.NameStyle;
 import org.jetbrains.annotations.NotNull;
@@ -40,7 +43,7 @@ public class ItemColorCommand implements CommandExecutor {
         }
         final PlainTextComponentSerializer plainText = PlainTextComponentSerializer.plainText();
         final ItemMeta meta = mainhandItem.getItemMeta();
-        final Component defaultDisplayComponent = Component.translatable(mainhandItem.translationKey());
+        final Component defaultDisplayComponent = defaultDisplayFor(mainhandItem, meta);
         final Component displayName = Optional.ofNullable(meta.displayName()).orElse(defaultDisplayComponent);
         final String defaultDisplayName = plainText.serialize(defaultDisplayComponent);
 
@@ -65,5 +68,18 @@ public class ItemColorCommand implements CommandExecutor {
         mainhandItem.setItemMeta(meta);
         p.sendMessage(deserialize("ic_success", s -> s));
         return true;
+    }
+
+    private static Component defaultDisplayFor(@NotNull final ItemStack item, @NotNull final ItemMeta meta) {
+        if (meta instanceof SkullMeta skull) {
+            final OfflinePlayer owner = skull.getOwningPlayer();
+            if (owner != null && owner.getName() != null) {
+                return Component.text(owner.getName() + "'s Head");
+            }
+        }
+        if (meta instanceof BookMeta book && book.getTitle() != null) {
+            return Component.text(book.getTitle());
+        }
+        return Component.translatable(item.translationKey());
     }
 }
