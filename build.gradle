@@ -129,5 +129,5 @@ tasks.register('downloadDonationApi') {
     }
 }
 
-//tasks.named('compileJava').configure { dependsOn(downloadDonationApi) }
-//tasks.named('compileTestJava').configure { dependsOn(downloadDonationApi) }
+tasks.named('compileJava').configure { dependsOn(downloadDonationApi) }
+tasks.named('compileTestJava').configure { dependsOn(downloadDonationApi) }
