@@ -93,16 +93,18 @@ public class NameColorPlugin extends JavaPlugin {
     }
 
     private void registerPlayerOpEventTimerTask() {
-        // probably not the best solution for a player op event, but atleast it works? spigot or paper, please add an op event :sob:
+        // poll op status and dispatch per-player work to the players region thread for the actual profile update
         foliaLib.getScheduler().runTimerAsync(() -> {
             final Map<UUID, Boolean> difference = getUuidBooleanMap();
-
             difference.forEach((uuid, wasOp) -> {
                 final Player player = Bukkit.getPlayer(uuid);
                 if (player == null) return;
-
-                final PlayerOpStatusChangeEvent opStatusChangeEvent = new PlayerOpStatusChangeEvent(player, wasOp, player.isOp(), true);
-                Bukkit.getPluginManager().callEvent(opStatusChangeEvent);
+                // folia: forceUpdate / callEvent must run on the player's region
+                foliaLib.getScheduler().runAtEntity(player, task -> {
+                    if (!player.isOnline()) return;
+                    final PlayerOpStatusChangeEvent opStatusChangeEvent = new PlayerOpStatusChangeEvent(player, wasOp, player.isOp(), true);
+                    Bukkit.getPluginManager().callEvent(opStatusChangeEvent);
+                });
             });
         }, 20L, 20L);
     }

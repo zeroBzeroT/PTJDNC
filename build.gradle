@@ -28,7 +28,7 @@ repositories {
     }
     maven {
         // FoliaLib
-        url = 'https://nexuslite.gcnt.net/repos/other/'
+        url = 'https://repo.tcoded.com/releases/'
         content {
             includeGroup 'com.tcoded'
         }
@@ -50,7 +50,7 @@ dependencies {
 
     // Folia API
     // https://jd.papermc.io/folia/1.20/
-    //compileOnly group: 'dev.folia', name: 'folia-api', version: "${project.minecraft_version}-R0.1-SNAPSHOT"
+    compileOnly group: 'dev.folia', name: 'folia-api', version: "${project.minecraftVersion}-R0.1-SNAPSHOT"
 
     // https://www.jetbrains.com/help/idea/annotating-source-code.html
     compileOnly group: 'org.jetbrains', name: 'annotations', version: "26.0.1"
@@ -59,7 +59,7 @@ dependencies {
     shadow group: 'com.jcabi', name: 'jcabi-aspects', version: '0.25.1'
 
     // https://github.com/TechnicallyCoded/FoliaLib
-    shadow group: 'com.tcoded', name: 'FoliaLib', version: "0.4.2"
+    shadow group: 'com.tcoded', name: 'FoliaLib', version: "0.5.1"
 
     // DonationAPI (from GitHub releases, downloaded at build time)
     compileOnly files("$rootDir/lib/DonationAPI-${donationApiVersion}.jar")
