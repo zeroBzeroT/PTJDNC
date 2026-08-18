@@ -123,8 +123,16 @@ tasks.register('downloadDonationApi') {
         def jar = file("$rootDir/lib/DonationAPI-${donationApiVersion}.jar")
         if (!jar.exists()) {
             println "Downloading DonationAPI-${donationApiVersion}.jar..."
-            def url = "https://github.com/zeroBzeroT/DonationAPI/releases/download/${donationApiVersion}/DonationAPI-${donationApiVersion}.jar"
-            ant.get(src: url, dest: jar, verbose: true)
+            def url = "https://github.com/zeroBzeroT/DonationAPI/releases/download/v${donationApiVersion}/DonationAPI-${donationApiVersion}.jar"
+            def token = System.getenv('DONATION_API_TOKEN')
+            def cmd = token
+                    ? ['curl', '-fsSL', '-H', "Authorization: token ${token}", url, '-o', jar.absolutePath]
+                    : ['curl', '-fsSL', url, '-o', jar.absolutePath]
+            def proc = cmd.execute()
+            proc.waitFor()
+            if (proc.exitValue() != 0) {
+                throw new GradleException("Failed to download DonationAPI: " + proc.errorStream.text)
+            }
         }
     }
 }
