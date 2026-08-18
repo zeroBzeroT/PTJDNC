@@ -36,8 +36,6 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: 'Build plugin'
-        env:
-          DONATION_API_TOKEN: ${{ secrets.DONATION_API_TOKEN }}
         run: ./gradlew --console plain --no-daemon --full-stacktrace check build
 
       - name: 'Release plugin'

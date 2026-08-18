@@ -12,7 +12,6 @@ ext {
     minecraftVersion = project.findProperty('minecraftVersion') ?: '1.20.4'
     javaVersion = JavaVersion.toVersion(project.findProperty('javaVersion') ?: '21')
     pluginVersion = project.findProperty('pluginVersion') ?: '1.0.0'
-    donationApiVersion = project.findProperty('donationApiVersion') ?: '1.0.2'
 }
 
 repositories {
@@ -61,8 +60,8 @@ dependencies {
     // https://github.com/TechnicallyCoded/FoliaLib
     shadow group: 'com.tcoded', name: 'FoliaLib', version: "0.5.1"
 
-    // DonationAPI (from GitHub releases, downloaded at build time)
-    compileOnly files("$rootDir/lib/DonationAPI-${donationApiVersion}.jar")
+    // DonationAPI (vendored jar)
+    compileOnly files("$rootDir/lib/DonationAPI-1.0.3.jar")
 }
 
 java {
@@ -116,26 +115,5 @@ tasks {
     }
 }
 
-tasks.register('downloadDonationApi') {
-    doLast {
-        def libDir = file("$rootDir/lib")
-        if (!libDir.exists()) libDir.mkdirs()
-        def jar = file("$rootDir/lib/DonationAPI-${donationApiVersion}.jar")
-        if (!jar.exists()) {
-            println "Downloading DonationAPI-${donationApiVersion}.jar..."
-            def url = "https://github.com/zeroBzeroT/DonationAPI/releases/download/v${donationApiVersion}/DonationAPI-${donationApiVersion}.jar"
-            def token = System.getenv('DONATION_API_TOKEN')
-            def cmd = token
-                    ? ['curl', '-fsSL', '-H', "Authorization: token ${token}", url, '-o', jar.absolutePath]
-                    : ['curl', '-fsSL', url, '-o', jar.absolutePath]
-            def proc = cmd.execute()
-            proc.waitFor()
-            if (proc.exitValue() != 0) {
-                throw new GradleException("Failed to download DonationAPI: " + proc.errorStream.text)
-            }
-        }
-    }
-}
-
-tasks.named('compileJava').configure { dependsOn(downloadDonationApi) }
-tasks.named('compileTestJava').configure { dependsOn(downloadDonationApi) }
+// DonationAPI jar vendored under lib/. Bump the version below and replace the file
+// when updating. See https://github.com/zeroBzeroT/DonationAPI for upstream.
