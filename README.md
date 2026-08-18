@@ -1,5 +1,5 @@
 # PTJDNC
-Fully configurable playtime + joindate based namecolor plugin for 1.19
+Fully configurable playtime + joindate based namecolor plugin for 1.20
 
 In order to get access to any given name color, both the joindate requirement (JD min.) as well as the playtime requirement (PT min.) have to be fulfilled.
 The playtime numbers here are measured in hours, whereas the joindate is either measured in days, or a certain date, where the player must have joined before it.
