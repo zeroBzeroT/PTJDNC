@@ -61,7 +61,7 @@ dependencies {
     shadow group: 'com.tcoded', name: 'FoliaLib', version: "0.5.1"
 
     // DonationAPI (vendored jar)
-    compileOnly files("$rootDir/lib/DonationAPI-1.0.3.jar")
+    compileOnly files("$rootDir/lib/DonationAPI-2.1.1.jar")
 }
 
 java {

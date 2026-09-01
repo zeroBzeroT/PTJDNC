@@ -4,7 +4,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.crayne.ptjdnc.NameColorPlugin;
 import org.crayne.ptjdnc.api.config.palette.ColorPalette;
 import org.jetbrains.annotations.NotNull;
-import org.zerobzerot.donationapi.DonationAPI;
+import org.zerobzerot.donationapi.api.DonationAPI;
 
 import java.util.*;
 
@@ -27,7 +27,7 @@ public class DonatorWhitelist implements NameStyleWhitelist {
     }
 
     public boolean nameColorAccessible(@NotNull final UUID uuid, @NotNull final String colorName) {
-        return DonationAPI.Instance.isActiveDonor(uuid) && availableNameColors.contains(colorName);
+        return DonationAPI.isActiveDonor(uuid) && availableNameColors.contains(colorName);
     }
 
 }
