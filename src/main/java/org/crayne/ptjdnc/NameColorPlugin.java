@@ -99,11 +99,11 @@ public class NameColorPlugin extends JavaPlugin {
             difference.forEach((uuid, wasOp) -> {
                 final Player player = Bukkit.getPlayer(uuid);
                 if (player == null) return;
-                // folia: forceUpdate / callEvent must run on the player's region
+                // folia: forceUpdate must run on the player's region; callEvent must run on the global region thread
                 foliaLib.getScheduler().runAtEntity(player, task -> {
                     if (!player.isOnline()) return;
                     final PlayerOpStatusChangeEvent opStatusChangeEvent = new PlayerOpStatusChangeEvent(player, wasOp, player.isOp(), true);
-                    Bukkit.getPluginManager().callEvent(opStatusChangeEvent);
+                    foliaLib.getScheduler().runAsync(t -> Bukkit.getPluginManager().callEvent(opStatusChangeEvent));
                 });
             });
         }, 20L, 20L);
